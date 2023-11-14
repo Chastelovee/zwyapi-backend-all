@@ -1,0 +1,23 @@
+server:
+  port: 7777
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - AddResponseHeader=source, zwy
+      routes:
+        - id: api_route
+          uri: http://localhost:8112
+          predicates:
+            - Path=/api/**
+
+dubbo:
+  application:
+#    name: dubbo-springboot-demo-provider
+    name: dubbo-zwyapi-consumer
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    id: nacos-registry
+    address: nacos://localhost:8848
